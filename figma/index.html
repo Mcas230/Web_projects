@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+
+<html lang="es">
+    <head>
+
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Practice Designing</title>
+        <meta name="description"
+            content="Practicando diseño de página 
+            estática en base a una plantilla de 
+            Figma de roadmap.sh para la ruta de 
+            Full Stack Developer.">
+
+        <link rel="icon" type="image/jpeg" href="img/examplefavicon.jpg">
+
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link href="https://fonts.googleapis.com/css2?family=Poppins&family=Recursive:wght@400;500;600;700&family=Source+Sans+Pro&display=swap" rel="stylesheet">
+
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+        
+        <link rel="stylesheet" href="style.css">
+        </head>
+
+    <body>
+        <header>
+            <div class="header-top">
+                <p class="developer-name">McDev</p>
+                <nav class="header-nav">
+                    <ul>
+                        <li><a href="#home">categories</a></li>
+                        <li><a href="#about">articles</a></li>
+                        <li><a href="#contact">about</a></li>
+                    </ul>
+                </nav>
+            </div>
+
+            <div class="header-content">
+                <img src="img/Logo.png" alt="imagen decorativa">
+                <h1 class="title">Writings for Developers</h1>
+                <p class="subtitle">Curated collection of articles for busy developers</p>
+            </div>
+
+        </header>
+        
+        <nav class="category-nav">
+            <ul>
+                <li><button type="button">
+                        <svg 
+                            xmlns="http://www.w3.org/2000/svg"
+                            viewBox="0 0 24 24"
+                            fill="none"
+                            stroke="currentColor"
+                            stroke-width="1.5"
+                            stroke-linecap="square"
+                            stroke-linejoin="miter"
+                            class="lucide lucide-grid3x3-icon lucide-grid-3x3">
+                            <rect width="18" height="18" x="3" y="3" rx="0"/>
+                            <path d="M4 9h16"/>
+                            <path d="M4 15h16"/>
+                            <path d="M9 4v16"/>
+                            <path d="M15 4v16"/>
+                        </svg>
+                    </button>
+                </li>
+
+                <li>
+                    <button type="button">
+                        <svg 
+                            xmlns="http://www.w3.org/2000/svg"
+                            viewBox="0 0 24 24"
+                            fill="none"
+                            stroke="currentColor"
+                            stroke-width="3"
+                            stroke-linecap="square"
+                            stroke-linejoin="miter"
+                            class="lucide lucide-menu-icon lucide-menu">
+                            <path d="M4 5h16"/>
+                            <path d="M4 12h16"/>
+                            <path d="M4 19h16"/>
+                        </svg>
+                    </button>
+                </li>
+                
+                <li><a href="#JavaScript">JavaScript</a></li>
+                <li><a href="#DevOps">DevOps</a></li>
+                <li><a href="#Cloud">Cloud</a></li>
+                <li><a href="#Architecture">Architecture</a></li>
+                <li><a href="#Scalability">Scalability</a></li>
+                <li><a href="#Explainers">Explainers</a></li>
+            </ul>
+        </nav>
+
+        <main>
+            <article>
+                <img src="img/example.jpg" alt="descripción de la imagen">
+                <h2>Un gato</h2>
+                <p>Fue la primera imagen que descargue</p>
+                <small>2026-08-29 · JavaScript</small>
+            </article>
+            <article>
+                <img src="img/hamster.jpg" alt="descripción de la imagen">
+                <h2>Yo el dia</h2>
+                <p>Yo el dia que acaben con netanyahu jejeje</p>
+                <small>2026-08-29 · JavaScript</small>
+            </article>
+            <article>
+                <img src="img/tabonito.jpg" alt="descripción de la imagen">
+                <h2>Ta bonitoo</h2>
+                <p>Mentira esta bien culero</p>
+                <small>2026-08-29 · JavaScript</small>
+            </article>
+            <article>
+                <img src="img/abelardo.jpg" alt="descripción de la imagen">
+                <h2>Republica Sionista de colombia</h2>
+                <p>La frente de abelardo casi deja mi pc sin almacenamiento en el disco duro</p>
+                <small>2026-08-29 · JavaScript</small>
+            </article>
+            <article>
+                <img src="img/fuher.jpg" alt="descripción de la imagen">
+                <h2>Autismo</h2>
+                <p>El autismo es cuando tus gustos son distintos a los mios meme</p>
+                <small>2026-08-29 · JavaScript</small>
+            </article>
+            <article>
+                <img src="img/chadlombia.jpg" alt="descripción de la imagen">
+                <h2>Nueva Judea</h2>
+                <p>Este pais nos fue prometido hace 2000 años </p>
+                <small>2026-08-29 · JavaScript</small>
+            </article>
+            <article>
+                <img src="img/don_pollo.png" alt="descripción de la imagen">
+                <h2>Pollo don Pollo</h2>
+                <p>EL mejor pollo de la ciudad</p>
+                <small>2026-08-29 · JavaScript</small>
+            </article>
+            <article>
+                <img src="img/digitalcircus.jpg" alt="descripción de la imagen">
+                <h2>Solo ver esta serie</h2>
+                <p>Ha causado autismo en cientos de jovenes</p>
+                <small>2026-08-29 · JavaScript</small>
+            </article>
+            <article>
+                <img src="img/perro.jpg" alt="descripción de la imagen">
+                <h2>Tenedor encontrado en la cocina</h2>
+                <p>perro descubre one piece y se duerme</p>
+                <small>en realidad las fechas no estan scripted xd</small>
+            </article>
+        </main>
+
+        <nav class="pagination" aria-label="Paginación">
+            <a href="#">Previous</a>
+            <a href="#" class="active">1</a>
+            <a href="#">2</a>
+            <a href="#">3</a>
+            <a href="#">4</a>
+            <a href="#">5</a>
+            <a href="#">next</a>
+        </nav>
+        
+
+        <footer>
+            <p class="developer-name">McDev</p>
+            <a href="https://github.com/Mcas230"><i class="fa-brands fa-github"></i>github</a>
+        </footer>
+
+    </body>
+
+</html>

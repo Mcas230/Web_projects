@@ -1,0 +1,227 @@
+body {
+    background-color: #232830;
+    display: flex;
+    flex-direction: column;
+    font-family: Arial, sans-serif;
+    color: #000000;
+    margin: 0;
+}
+
+a {
+    color: #ffffff;
+    text-decoration: none;
+}
+
+header {
+    font-family: 'Poppins', sans-serif;
+    margin: 20px 50px 0;
+    font-weight: 400;
+    font-size: 30px;
+    color: #ffffff;
+}
+
+.header-top {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-size: 24px;
+}
+
+.header-top a {
+    padding: 5px;
+    border-radius: 25px;
+    transition: 0.2s;
+    display: inline-block;
+}
+
+
+.header-top a:hover {
+    color: #000000;
+    transform: translateY(-5px) scale(1.05);
+    background-color: #ffffff;
+}
+
+.header-content {
+    text-align: center;
+    margin-top: 40px;
+}
+
+.title {
+    font-family: 'Recursive', 'Poppins', sans-serif;
+    font-size: 70px;
+    font-style: italic;
+    font-weight: 400;
+    margin: 10px 0;
+    color: #FF7575;
+}
+
+.subtitle {
+    font-family: 'Poppins', sans-serif;
+    font-size: 24px;
+    font-weight: 400;
+    color: #ffffff;
+}
+
+.header-nav ul {
+    display: flex;
+    list-style: none;
+    gap: 10px;
+}
+
+.category-nav {
+    border-top: 2px solid #4D4D4D;
+    padding-top: 20px;
+}
+
+.category-nav ul {
+    display: flex;
+    list-style: none;
+    gap: 35px;
+    justify-content: center;
+    margin-top: 20px;
+    font-family: 'Recursive', 'Poppins', sans-serif;
+    font-size: 27px;
+    font-style: italic;
+}
+
+.category-nav a {
+    color: #909090;
+    display: inline-block;
+}
+
+.category-nav button {
+    background: none;
+    border: none;
+    padding: 0;
+}
+
+.category-nav svg {
+    width: 27px;
+    height: 27px;
+    color: #909090;
+}
+
+.category-nav a,
+.category-nav svg {
+    transition: 0.2s;
+}
+
+.category-nav li:hover a,
+.category-nav li:hover svg {
+    color: #FF7575;
+    transform: translateY(-5px) scale(1.05);
+    filter: drop-shadow(0 0 10px #FF7575);
+}
+
+main {
+    display: grid;
+    grid-template-columns: repeat(3, 300px);
+    gap: 30px 40px;
+    justify-content: center;
+    margin: 40px 60px;
+}
+
+article {
+    width: 300px;
+    height: 300px;
+    background-color: #ffffff;
+    border-radius: 10px;
+
+    display: flex;
+    flex-direction: column;
+
+    transition: 0.5s;
+}
+
+article:hover {
+    background-color: #000000;
+    color: #ffffff;
+    filter: drop-shadow(0 0 15px #ffffff);
+    transform: translateY(-15px);
+}
+
+article img {
+    display: block;
+    margin: 20px auto;
+    width: 260px;
+    height: 110px;
+    border-radius: 10px;
+    object-fit: cover;
+}
+
+article h2 {
+    margin: 0 20px 5px;
+}
+
+article p {
+    margin: 0 20px;
+    font-size: 14.5px;
+}
+
+article small {
+    display: block;
+    margin: auto 20px 20px;
+}
+
+.pagination {
+    font-family: 'Recursive', 'Poppins', sans-serif;
+    display: flex;
+    color: #909090;
+    justify-content: center;
+    text-align: center;
+    margin: 20px auto 100px;
+    gap: 30px;
+}
+
+.pagination a {
+    color: #909090;
+    font-size: 25px;
+    font-style: italic;
+    transition: 0.2s;
+    padding-top: 10px;
+    border-top: 3px solid transparent;
+}
+
+.pagination a:hover {
+    color: #FF7575;
+    transform: translateY(-5px) scale(1.05);
+    filter: drop-shadow(0 0 10px #FF7575);
+}
+
+.pagination a.active {
+    color: #FF7575;
+    border-top: 3px solid #FF7575;
+}
+footer {
+    display: flex;
+    font-family: 'Source Sans Pro', sans-serif;
+    justify-content: space-between;
+    align-items: center;
+    font-size: 24px;
+    margin: 0;
+    padding: 20px 50px 50px;
+    border-top: 2px solid #4D4D4D;
+    color: #ffffff;
+}
+
+footer a {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 20px;
+    font-weight: 500;
+    background-color: #4699E0;
+    border-radius: 5px;
+    padding: 5px 10px;
+    transition: 0.2s;
+}
+
+footer a:hover {
+    background-color: #000000;
+    filter: drop-shadow(0 0 10px #4699E0);
+    transform: translateY(-5px) scale(1.05);
+}
+
+footer a i {
+    font-size: 20px;
+}
