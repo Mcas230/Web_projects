@@ -226,17 +226,14 @@ footer a i {
     font-size: 20px;
 }
 
-
-
-
 @media (max-width: 700px) {
 
     header {
-        margin: 20px;
+        margin: 15px 20px 0;
     }
 
     .header-top {
-        font-size: 20px;
+        font-size: 18px;
     }
 
     .header-nav ul {
@@ -245,36 +242,39 @@ footer a i {
     }
 
     .header-content {
-        margin-top: 30px;
-    }
-
-    .header-content img {
-        width: 150px;
+        margin-top: 25px;
     }
 
     .title {
-        font-size: 45px;
+        font-size: clamp(36px, 10vw, 45px);
+        line-height: 1.1;
     }
 
     .subtitle {
-        font-size: 18px;
+        font-size: 16px;
+        line-height: 1.4;
     }
 
     .category-nav {
-        overflow-x: auto;
+        padding-top: 10px;
     }
 
     .category-nav ul {
-        justify-content: flex-start;
-        gap: 20px;
-        font-size: 22px;
-        padding: 0 20px;
-        width: max-content;
+        gap: 10px;
+        margin-top: 10px;
+        padding: 0 10px;
+        font-size: 15px;
+        flex-wrap: wrap;
+    }
+
+    .category-nav svg {
+        width: 19px;
+        height: 19px;
     }
 
     main {
         grid-template-columns: 300px;
-        margin: 40px 20px;
+        margin: 30px 20px;
     }
 
     footer {
