@@ -169,16 +169,17 @@ article small {
     color: #909090;
     justify-content: center;
     text-align: center;
-    margin: 20px auto 100px;
-    gap: 30px;
+    gap: 12px;
+    margin: 20px auto 60px;
 }
 
 .pagination a {
     color: #909090;
-    font-size: 25px;
     font-style: italic;
     transition: 0.2s;
-    padding-top: 10px;
+    font-size: 18px;
+    padding-top: 8px;
+
     border-top: 3px solid transparent;
 }
 
