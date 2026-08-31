@@ -229,14 +229,55 @@ footer a i {
 
 
 
-@media (max-width: 1000px) {
-    main {
-        grid-template-columns: repeat(2, 300px);
-    }
-}
-
 @media (max-width: 700px) {
+
+    header {
+        margin: 20px;
+    }
+
+    .header-top {
+        font-size: 20px;
+    }
+
+    .header-nav ul {
+        gap: 5px;
+        padding: 0;
+    }
+
+    .header-content {
+        margin-top: 30px;
+    }
+
+    .header-content img {
+        width: 150px;
+    }
+
+    .title {
+        font-size: 45px;
+    }
+
+    .subtitle {
+        font-size: 18px;
+    }
+
+    .category-nav {
+        overflow-x: auto;
+    }
+
+    .category-nav ul {
+        justify-content: flex-start;
+        gap: 20px;
+        font-size: 22px;
+        padding: 0 20px;
+        width: max-content;
+    }
+
     main {
         grid-template-columns: 300px;
+        margin: 40px 20px;
+    }
+
+    footer {
+        padding: 20px;
     }
 }
