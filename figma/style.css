@@ -234,11 +234,11 @@ footer a i {
     }
 
     .header-top {
-        font-size: 18px;
+        font-size: 16px;
     }
 
     .header-nav ul {
-        gap: 5px;
+        gap: 8px;
         padding: 0;
     }
 
@@ -261,11 +261,12 @@ footer a i {
     }
 
     .category-nav ul {
-        gap: 10px;
+        gap: 8px 12px;
         margin-top: 10px;
-        padding: 0 10px;
+        padding: 0 15px;
         font-size: 15px;
         flex-wrap: wrap;
+        justify-content: center;
     }
 
     .category-nav svg {
