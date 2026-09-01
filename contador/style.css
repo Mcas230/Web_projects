@@ -61,3 +61,15 @@ button.reset{
     background-color: blue;
 }
 
+@media (max-width: 500px) {
+    
+    .botones button {
+        width: 120px;
+        height: 120px;
+    }
+
+    span {
+        height: 120px;
+    }
+
+}
