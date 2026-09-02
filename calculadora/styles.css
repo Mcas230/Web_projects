@@ -1,0 +1,150 @@
+body {
+    background-color: #000;
+
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+
+    min-height: 100vh;
+    
+    color: #000000;
+    margin: 0;
+    font-family: 'Press Start 2P', cursive;
+}
+
+.calcInput {
+
+    font-size: 16px;
+
+    font-weight: 400;
+    min-width: 350px;
+    max-width: 350px;
+
+    min-height: 25px;
+
+    margin: 10px 0;
+    color: red;
+    font-family: 'Press Start 2P', cursive;
+}
+
+.calcInput:hover,
+.calcInput:focus{
+    filter: drop-shadow(0 0 50px yellow);
+}
+
+.calcDisplay {
+    display: flex;
+    align-items: center;
+
+    font-family: 'Press Start 2P', cursive;
+    font-size: 70px;
+    font-style: italic;
+    font-weight: 400;
+
+    min-width: 350px;
+    max-width: 500px;
+    min-height: 100px;
+
+    margin: 10px 0;
+    background-color: aqua;
+    border-radius: 5px;
+    animation: glow 2s infinite;
+    color: red;
+    
+    margin-bottom: 20px;
+    
+
+    overflow: hidden;
+}
+
+.calcButton {
+    display: grid;
+
+    width: 350px;
+
+    grid-template-columns: repeat(5, 1fr);
+    grid-auto-rows: 1fr;
+
+    gap: 5px;
+
+}
+
+.calcButton button {
+    font-family: 'Press Start 2P', cursive;
+    border-radius: 5px;
+    text-decoration: none;
+    font-size: 20px;
+    color: white ;
+    aspect-ratio: 1 / 1;
+    background-color: black;
+    animation: borde 2s infinite;
+}
+
+
+
+
+
+@keyframes glow {
+    0% {
+        filter: drop-shadow(0 0 50px red);
+    }
+
+    33% {
+        filter: drop-shadow(0 0 50px blue);
+    }
+
+    66% {
+        filter: drop-shadow(0 0 50px yellow);
+    }
+
+    100% {
+        filter: drop-shadow(0 0 50px red);
+    }
+}
+
+.calcButton button:hover {
+    border: 2px solid red;
+    border-radius: 5px;
+    animation: colores 2s infinite;
+}
+
+@keyframes colores {
+    0% {
+        border-color: red;
+        background-color: blue;
+    }
+
+    33% {
+        border-color: blue;
+        background-color: yellow;
+    }
+
+    66% {
+        border-color: purple;
+        background-color: red;
+    }
+
+    100% {
+        border-color: red;
+        background-color: orange;
+    }
+}
+
+@keyframes borde {
+    0% {
+        border-color: red;
+    }
+
+    33% {
+        border-color: blue;
+    }
+
+    66% {
+        border-color: purple;
+    }
+
+    100% {
+        border-color: red;
+    }
+}
