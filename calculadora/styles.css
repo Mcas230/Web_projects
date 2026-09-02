@@ -148,3 +148,28 @@ body {
         border-color: red;
     }
 }
+
+@media (max-width: 500px) {
+
+    .calcInput {
+        min-width: 90vw;
+        max-width: 90vw;
+        font-size: 12px;
+    }
+
+    .calcDisplay {
+        min-width: 90vw;
+        max-width: 90vw;
+        font-size: 35px;
+        min-height: 80px;
+    }
+
+    .calcButton {
+        width: 90vw;
+        gap: 4px;
+    }
+
+    .calcButton button {
+        font-size: 12px;
+    }
+}
