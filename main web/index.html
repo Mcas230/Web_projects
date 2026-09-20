@@ -1,86 +1,364 @@
 <!DOCTYPE html>
 <html lang="es">
 
-    <head>
+<head>
 
-        <meta charset="UTF-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-        <title>Kogan Dashboard</title>
+    <title>Mcdev</title>
 
-        <link rel="icon" type="image/jpeg" href="img/wariofavicon.jpg">
-        <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="style.css">
 
-    </head>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 
-    <body>
-        <header>
-            <h1 class="header-title">Proyectos web jeje 🐈</h1>
-            <nav class="header-nav">
-                <a href="#project-list">Proyectos</a>
-                <a href="https://github.com/Mcas230">github</a>
-                <a href="https://github.com/Mcas230/Web_projects">repositorio</a>
-            </nav>
-        </header>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Geist:wght@400;500;600;700&family=Geist+Mono:ital,wght@0;100..900;1;100..900&display=swap"
+        rel="stylesheet"
+    >
 
-        <main id="project-list">
-            <h2>Introducción</h2>
+    <link
+        rel="stylesheet"
+        href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200&icon_names=open_in_new"
+    >
 
-            <p>
-                Basicamente queria aprender
-                sobre desarrollo web asi que basicamente
-                hice esto para practicar y asi, luego ire haciendo
-                UI mas elaboradas para que la pagina deje de parecer acortador
-                de mala muerte de los 90s.
-            </p>
+    <link
+        rel="stylesheet"
+        href="https://fonts.googleapis.com/css2?family=Material+Symbols+Rounded:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200&icon_names=arrow_forward"
+    >
 
-            <h2>Lista de proyectos</h2>
+</head>
 
-            <nav>
-                <ul>
-                    <li>
-                        <a href="../Space%20Jam/index.html">
-                            la cosa esa de space jam
+<body>
+
+    <header class="site-header">
+
+        <a href="#hero" class="site-title">Mcdev</a>
+
+        <nav class="site-nav">
+
+            <a href="#about">Sobre mí</a>
+            <a href="#projects">Proyectos</a>
+            <a href="#contact">Contacto</a>
+            <a href="#">GitHub</a>
+
+            <div class="work-status">
+                <span class="status-dot"></span>
+                <span class="status-text">AVAILABLE FOR WORK</span>
+            </div>
+
+        </nav>
+
+    </header>
+
+
+    <main>
+
+        <!-- HERO -->
+
+        <section id="hero">
+
+            <div class="hero-content">
+
+                <div class="hero-introduction">
+
+                    <p class="terminal-command">
+                        $ cat introduction.md
+                    </p>
+
+                    <h1>Miguel Castillo</h1>
+
+                    <h2>Web Developer</h2>
+
+                    <p>
+                        I'm a web developer focused on building functional software while constantly learning and experimenting with new technologies.
+                    </p>
+
+                    <a href="#projects" class="projects-button">
+                        View Projects
+                        <span class="arrow">→</span>
+                    </a>
+
+                </div>
+
+
+                <div class="hero-code">
+
+                    <pre><code><span class="line-number">01</span> const developer = {
+<span class="line-number">02</span>   name: 'Miguel Castillo',
+<span class="line-number">03</span>   role: 'Web Developer',
+<span class="line-number">04</span>   status: 'Available',
+<span class="line-number">04</span>   interests: ['Clean Code', 'UX/UI']
+<span class="line-number">05</span> };
+<span class="line-number">05</span>
+<span class="line-number">08</span> <span class="code-comment">// init system</span>
+<span class="line-number">05</span> initSystem(developer);</code></pre>
+
+                    <pre class="build-status">+------------------------+
+| BUILD: SUCCESSFUL      |
++------------------------+</pre>
+
+                </div>
+
+            </div>
+
+        </section>
+
+
+        <!-- ABOUT -->
+
+        <section id="about">
+
+            <div class="about-content">
+
+                <div class="about-introduction">
+
+                    <p class="section-label">
+                        01 / ACERCA DE MÍ
+                    </p>
+
+                    <h2>Antecedentes y enfoque</h2>
+
+                    <div class="about-details">
+
+                        <div class="about-description">
+
+                            <p>
+                                Soy un programador web apasionado bla bla bla
+                            </p>
+
+                            <p class="about-note">
+                                Mi educación en ingeniería me permite cosas grandes...
+                            </p>
+
+                        </div>
+
+
+                        <div class="about-info">
+
+                            <div class="info-box">
+                                <span class="info-label">LOCATION</span>
+                                <strong>COLOMBIA</strong>
+                            </div>
+
+                            <div class="info-box">
+                                <span class="info-label">EXPERIENCE</span>
+                                <strong>+1 YEAR</strong>
+                            </div>
+
+                            <div class="info-box">
+                                <span class="info-label">FOCUS</span>
+                                <strong>WEB DEVELOPMENT</strong>
+                            </div>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </section>
+
+
+        <!-- SKILLS -->
+
+        <section id="skills">
+
+            <div class="skills-content">
+
+                <div class="skills-introduction">
+
+                    <p class="section-label">
+                        02 / HABILIDADES
+                    </p>
+
+                    <h2>Technical Proficiency</h2>
+
+                </div>
+
+
+                <div class="skills-list">
+
+                    <div class="skill-box">
+
+                        <div class="skill-header">
+                            <strong>HTML</strong>
+                            <span>PROFICIENT</span>
+                        </div>
+
+                        <div class="skill-level">
+                            <span></span>
+                            <span></span>
+                            <span></span>
+                            <span></span>
+                            <span></span>
+                            <span></span>
+                            <span></span>
+                            <span></span>
+                        </div>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </section>
+
+
+        <!-- PROJECTS -->
+
+        <section id="projects">
+
+            <div class="projects-content">
+
+                <div class="projects-introduction">
+
+                    <p class="section-label">
+                        03 / PROJECTS
+                    </p>
+
+                    <h2>Featured Implementations</h2>
+
+                </div>
+
+
+                <div class="projects-list">
+
+                    <article class="project-box">
+
+                        <div class="project-window">
+
+                            <div class="project-window-header">
+
+                                <div class="window-controls">
+                                    <span></span>
+                                    <span></span>
+                                    <span></span>
+                                </div>
+
+                                <span class="project-window-title">
+                                    app.io
+                                </span>
+
+                            </div>
+
+                            <div class="project-window-content"></div>
+
+                        </div>
+
+
+                        <div class="project-content">
+
+                            <h2>TaskFlow</h2>
+
+                            <p>
+                                A task management app with drag-and-drop
+                                and real-time updates.
+                            </p>
+
+                            <div class="project-tags">
+                                <span>Node.js</span>
+                                <span>JavaScript</span>
+                                <span>Git</span>
+                            </div>
+
+                        </div>
+
+
+                        <a class="project-link" href="#">
+                            <span class="project-link-text">
+                                View Project
+                                <span class="material-symbols-rounded">
+                                    arrow_forward
+                                </span>
+                            </span>
                         </a>
-                    </li>
 
-                    <li>
-                        <a href="main_versions/versiones.html">
-                            Historial de versiones de la página principal
-                        </a>
-                    </li>
+                    </article>
 
-                    <li>
-                        <a href="..\figma\index.html">
-                            diseño pagina figma
-                        </a>
-                    </li>
-                    
-                    <li>
-                        <a href="..\contador\index.html">
-                            contador
-                        </a>
-                    </li>
-                    <li>
-                        <a href="..\calculadora\index.html">
-                            calculadora
-                        </a>
-                    </li>
-                </ul>
-            </nav>
+                </div>
 
-            <small class="disclaimer">
-                el historial de versiones podria
-                no funcionar porque basicamente porque
-                las rutas estan rotas, huh apenas aprendi a hacer paginas
-                ayer no esperen mucho, huh si pueden dar feedback pues
-                se jodieron, no implementare eso, al github si quieren pues
-            </small>
+            </div>
 
-        </main>
+        </section>
 
-        <footer>
-            <p>2026 Proyectos web, ta bonito meme.</p>
-        </footer>
-    </body>
+
+        <!-- CONTACT -->
+
+        <section id="contact">
+
+            <div class="contact-content">
+
+                <div class="contact-introduction">
+
+                    <p class="section-label">
+                        04 / CONTACT
+                    </p>
+
+                    <h2>Trabaja conmigo</h2>
+
+                    <p>
+                        Actualmente disponible para el desarrollo
+                        de páginas web dinámicas, etc.
+                    </p>
+
+                </div>
+
+
+                <div class="contact-info">
+
+                    <a class="info-box" href="#">
+
+                        <span class="info-label">EMAIL</span>
+                        <strong>email</strong>
+                        <span class="material-symbols-outlined">
+                            open_in_new
+                        </span>
+
+                    </a>
+
+
+                    <a class="info-box" href="#">
+
+                        <span class="info-label">GITHUB</span>
+                        <strong>github</strong>
+                        <span class="material-symbols-outlined">
+                            open_in_new
+                        </span>
+
+                    </a>
+
+
+                    <a class="info-box" href="#">
+
+                        <span class="info-label">LINKEDIN</span>
+                        <strong>linkedin</strong>
+                        <span class="material-symbols-outlined">
+                            open_in_new
+                        </span>
+
+                    </a>
+
+                </div>
+
+            </div>
+
+        </section>
+
+    </main>
+
+
+    <footer class="site-footer">
+
+        <p>2026 Miguel Castillo (Mcdev)</p>
+        <p>Built with HTML, CSS &amp; JS</p>
+
+    </footer>
+
+</body>
+
 </html>
