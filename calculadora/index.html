@@ -2,45 +2,129 @@
 
 <html>
     <head>
-        <title>calculadora</title>
+        <title>Calculadora</title>
 
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
         <link rel="preconnect" href="https://fonts.googleapis.com">
         <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-        <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap" rel="stylesheet">
+
+        <link
+            href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap"
+            rel="stylesheet"
+        >
 
         <link rel="stylesheet" href="styles.css">
-        <script src="script.js" defer></script>
-        <script src="events.js" defer></script>
+
+        <script type="module" src="js/events.js" defer></script>
+
     </head>
 
     <body>
 
-        <input class="calcInput" type="text" id="expresionInput" placeholder="Ingrese una expresión">
-        <span class="calcDisplay" id="texto">0</span>
+        <main class="calculadora">
 
-        <div class ="calcButton">
+            <!-- PANEL IZQUIERDO -->
 
-        <button id="boton1">1</button>
-        <button id="boton2">2</button>
-        <button id="boton3">3</button>
-        <button id="botonPotencia">^</button>
-        <button id="botonRaiz">√</button>
-        <button id="boton4">4</button>
-        <button id="boton5">5</button>
-        <button id="boton6">6</button>
-        <button id="botonMultiplicacion">*</button>
-        <button id="botonDivision">/</button>
-        <button id="boton7">7</button>
-        <button id="boton8">8</button>
-        <button id="boton9">9</button>
-        <button id="botonSuma">+</button>
-        <button id="botonResta">-</button>
-        <button id="boton0">0</button>
-    
+            <aside class="panel funcionesPanel">
 
-        </div>
+                <h2>FUNCIONES</h2>
+
+                <div id="listaFunciones" class="listaFunciones">
+                    <!-- Las funciones aparecerán aquí -->
+                </div>
+
+            </aside>
+
+
+            <!-- ZONA CENTRAL -->
+
+            <section class="zonaCentral">
+
+                <!-- VISUALIZACIÓN -->
+
+                <div class="visualizacion">
+
+                    <canvas id="grafica" width="600" height="400"></canvas>
+
+                </div>
+
+
+                <!-- CONTROLES -->
+
+                <div class="controles">
+
+                    <!-- INPUT -->
+
+                    <div class="entrada">
+
+                        <input
+                            class="calcInput"
+                            type="text"
+                            id="expresionInput"
+                            placeholder="Ingrese una expresión"
+                        >
+
+                        <button id="botonAgregar">+</button>
+
+                    </div>
+
+
+                    <!-- TECLADO -->
+
+                    <div class="calcButton">
+
+                        <button id="boton7">7</button>
+                        <button id="boton8">8</button>
+                        <button id="boton9">9</button>
+
+                        <button id="botonSuma">+</button>
+                        <button id="botonResta">-</button>
+
+
+                        <button id="boton4">4</button>
+                        <button id="boton5">5</button>
+                        <button id="boton6">6</button>
+
+                        <button id="botonMultiplicacion">*</button>
+                        <button id="botonDivision">/</button>
+
+
+                        <button id="boton1">1</button>
+                        <button id="boton2">2</button>
+                        <button id="boton3">3</button>
+
+                        <button id="botonPotencia">^</button>
+                        <button id="botonRaiz">√</button>
+
+
+                        <button id="boton0">0</button>
+                        <button id="botonPunto">.</button>
+
+                        <button id="botonAbrir">(</button>
+                        <button id="botonCerrar">)</button>
+
+                    </div>
+
+                </div>
+
+            </section>
+
+
+            <!-- PANEL DERECHO -->
+
+            <aside class="panel inspector">
+
+                <h2>INSPECTOR</h2>
+
+                <div id="inspectorContenido">
+                    <p>Seleccione una función.</p>
+                </div>
+
+            </aside>
+
+        </main>
+
     </body>
 </html>

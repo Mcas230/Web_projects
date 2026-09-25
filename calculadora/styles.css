@@ -1,175 +1,300 @@
+* {
+    box-sizing: border-box;
+}
+
 body {
-    background-color: #000;
-
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-
-    min-height: 100vh;
-    
-    color: #000000;
     margin: 0;
-    font-family: 'Press Start 2P', cursive;
+
+    background: #0A0A0E;
+    color: #F1F3F5;
+
+    font-family: "Press Start 2P", monospace;
 }
 
-.calcInput {
 
-    font-size: 16px;
+.calculadora {
 
-    font-weight: 400;
-    min-width: 350px;
-    max-width: 350px;
+    width: 100vw;
+    height: 100vh;
 
-    min-height: 25px;
+    display: grid;
 
-    margin: 10px 0;
-    color: red;
-    font-family: 'Press Start 2P', cursive;
-}
-
-.calcInput:hover,
-.calcInput:focus{
-    filter: drop-shadow(0 0 50px yellow);
-}
-
-.calcDisplay {
-    display: flex;
-    align-items: center;
-
-    font-family: 'Press Start 2P', cursive;
-    font-size: 70px;
-    font-style: italic;
-    font-weight: 400;
-
-    min-width: 350px;
-    max-width: 500px;
-    min-height: 100px;
-
-    margin: 10px 0;
-    background-color: aqua;
-    border-radius: 5px;
-    animation: glow 2s infinite;
-    color: red;
-    
-    margin-bottom: 20px;
-    
+    grid-template-columns:
+        220px
+        minmax(0, 1fr)
+        220px;
 
     overflow: hidden;
 }
 
+
+/* PANELES LATERALES */
+
+.panel {
+
+    background: #0F1015;
+
+    border: 1px solid #1E2330;
+
+    padding: 20px;
+
+    overflow-y: auto;
+}
+
+.panel h2 {
+
+    margin-top: 0;
+
+    font-size: 12px;
+
+    color: #E0B84F;
+}
+
+
+/* PANEL IZQUIERDO */
+
+.funcionesPanel {
+
+    border-right: 1px solid #1E2330;
+}
+
+
+.listaFunciones {
+
+    display: flex;
+
+    flex-direction: column;
+
+    gap: 8px;
+}
+
+
+.funcion {
+
+    width: 100%;
+
+    padding: 10px;
+
+    background: #0A0A0E;
+
+    color: #F1F3F5;
+
+    border: 1px solid #1E2330;
+
+    font-family: inherit;
+
+    font-size: 10px;
+
+    text-align: left;
+
+    cursor: pointer;
+}
+
+
+.funcion:hover {
+
+    border-color: #E0B84F;
+
+}
+
+
+/* ZONA CENTRAL */
+
+.zonaCentral {
+    min-width: 0;
+    min-height: 0;
+
+    display: grid;
+    
+    grid-template-rows: minmax(0, 1fr) 220px;
+}
+
+
+/* VISUALIZACIÓN */
+
+.visualizacion {
+
+    min-height: 0;
+
+    background: #0A0A0E;
+
+    border-top: 1px solid #1E2330;
+    border-bottom: 1px solid #1E2330;
+
+    overflow: hidden;
+}
+
+
+#texto {
+
+    color: #62C77A;
+
+    font-size: 20px;
+}
+
+
+/* CONTROLES */
+
+.controles {
+
+    min-height: 0;
+
+    background: #0F1015;
+
+    padding: 15px;
+
+    display: flex;
+
+    flex-direction: column;
+
+    gap: 15px;
+}
+
+
+/* INPUT */
+
+.entrada {
+
+    display: flex;
+
+    gap: 8px;
+}
+
+
+.calcInput {
+
+    flex: 1;
+
+    min-width: 0;
+
+    height: 45px;
+
+    padding: 10px;
+
+    background: #0A0A0E;
+
+    border: 1px solid #1E2330;
+
+    color: #F1F3F5;
+
+    font-family: inherit;
+
+    font-size: 12px;
+
+    outline: none;
+}
+
+
+.calcInput:focus {
+
+    border-color: #E0B84F;
+
+}
+
+
+#botonAgregar {
+
+    width: 45px;
+
+    height: 45px;
+
+    background: #E0B84F;
+
+    color: #0A0A0E;
+
+    border: none;
+
+    font-family: inherit;
+
+    font-size: 18px;
+
+    cursor: pointer;
+}
+
+
+#botonAgregar:hover {
+
+    filter: brightness(1.1);
+
+}
+
+
+/* TECLADO */
+
 .calcButton {
+
+    flex: 1;
+
     display: grid;
 
-    width: 350px;
+    grid-template-columns:
+        repeat(5, 1fr);
 
-    grid-template-columns: repeat(5, 1fr);
-    grid-auto-rows: 1fr;
+    grid-template-rows:
+        repeat(4, 1fr);
 
-    gap: 5px;
+    gap: 8px;
 
+    min-height: 0;
 }
+
 
 .calcButton button {
-    font-family: 'Press Start 2P', cursive;
-    border-radius: 5px;
-    text-decoration: none;
-    font-size: 20px;
-    color: white ;
-    aspect-ratio: 1 / 1;
-    background-color: black;
-    animation: borde 2s infinite;
+
+    background: #0A0A0E;
+
+    color: #F1F3F5;
+
+    border: 1px solid #1E2330;
+
+    font-family: inherit;
+
+    font-size: 11px;
+
+    cursor: pointer;
 }
 
-
-
-
-
-@keyframes glow {
-    0% {
-        filter: drop-shadow(0 0 50px red);
-    }
-
-    33% {
-        filter: drop-shadow(0 0 50px blue);
-    }
-
-    66% {
-        filter: drop-shadow(0 0 50px yellow);
-    }
-
-    100% {
-        filter: drop-shadow(0 0 50px red);
-    }
-}
 
 .calcButton button:hover {
+
+    border-color: #E0B84F;
+
+    color: #E0B84F;
+
+}
+
+
+.calcButton button:active {
+
+    background: #E0B84F;
+
+    color: #0A0A0E;
+
+}
+
+
+/* PANEL DERECHO */
+
+.inspector {
+
+    border-left: 1px solid #1E2330;
+}
+
+
+#inspectorContenido {
+
+    color: #9AA1AD;
+
+    font-size: 9px;
+
+    line-height: 1.8;
+}
+
+#grafica {
+    width: 100%;
+    height: 100%;
+
+    display: block;
+
     border: 2px solid red;
-    border-radius: 5px;
-    animation: colores 2s infinite;
-}
-
-@keyframes colores {
-    0% {
-        border-color: red;
-        background-color: blue;
-    }
-
-    33% {
-        border-color: blue;
-        background-color: yellow;
-    }
-
-    66% {
-        border-color: purple;
-        background-color: red;
-    }
-
-    100% {
-        border-color: red;
-        background-color: orange;
-    }
-}
-
-@keyframes borde {
-    0% {
-        border-color: red;
-    }
-
-    33% {
-        border-color: blue;
-    }
-
-    66% {
-        border-color: purple;
-    }
-
-    100% {
-        border-color: red;
-    }
-}
-
-@media (max-width: 500px) {
-
-    .calcInput {
-        min-width: 90vw;
-        max-width: 90vw;
-        font-size: 12px;
-    }
-
-    .calcDisplay {
-        min-width: 90vw;
-        max-width: 90vw;
-        font-size: 35px;
-        min-height: 80px;
-    }
-
-    .calcButton {
-        width: 90vw;
-        gap: 4px;
-    }
-
-    .calcButton button {
-        font-size: 12px;
-    }
 }
