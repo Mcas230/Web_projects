@@ -10,15 +10,26 @@ const grafica =
 const contexto =
     grafica.getContext("2d");
 
+const visualizacion =
+    grafica.parentElement;
 
-let centroX = 300;
-let centroY = 200;
-let escala = 20;
+
+// ============================================
+// TAMAÑO REAL DE LA GRÁFICA
+// ============================================
+
+let anchoGrafica = 0;
+let altoGrafica = 0;
 
 
 // ============================================
 // CÁMARA
 // ============================================
+
+let centroX = 0;
+let centroY = 0;
+
+let escala = 20;
 
 let desplazamientoX = 0;
 let desplazamientoY = 0;
@@ -30,21 +41,205 @@ let ultimoMouseY = 0;
 
 
 // Última expresión dibujada.
-// Permite redibujar al mover o hacer zoom.
+
 let expresionActual = null;
 
 
-const limiteX = 15;
-const limiteY = 15;
+// ============================================
+// CONFIGURACIÓN DEL RENDERER
+// ============================================
 
-const pasoEcuacion = 0.025;
+const pixelesPorMuestra = 2;
 
-const extensionSegmento =
-    pasoEcuacion * 1.2;
+const minimoMuestras = 2;
+const maximoMuestras = 1200;
 
 
-contexto.strokeStyle = "white";
-contexto.lineWidth = 3;
+// ============================================
+// AJUSTAR CANVAS
+// ============================================
+
+function ajustarCanvas() {
+
+    const rectangulo =
+        visualizacion.getBoundingClientRect();
+
+    const nuevoAncho =
+        Math.max(
+            1,
+            Math.round(rectangulo.width)
+        );
+
+    const nuevoAlto =
+        Math.max(
+            1,
+            Math.round(rectangulo.height)
+        );
+
+
+    if (
+        nuevoAncho == anchoGrafica &&
+        nuevoAlto == altoGrafica
+    ) {
+        return;
+    }
+
+
+    // ========================================
+    // CONSERVAR EL CENTRO MATEMÁTICO
+    // ========================================
+
+    let mundoCentroX = 0;
+    let mundoCentroY = 0;
+
+
+    if (
+        anchoGrafica > 0 &&
+        altoGrafica > 0
+    ) {
+
+        mundoCentroX =
+            convertirMundoX(
+                anchoGrafica / 2
+            );
+
+        mundoCentroY =
+            convertirMundoY(
+                altoGrafica / 2
+            );
+    }
+
+
+    anchoGrafica =
+        nuevoAncho;
+
+    altoGrafica =
+        nuevoAlto;
+
+
+    centroX =
+        anchoGrafica / 2;
+
+    centroY =
+        altoGrafica / 2;
+
+
+    // ========================================
+    // CONSERVAR EL CENTRO
+    // ========================================
+
+    desplazamientoX =
+        -mundoCentroX * escala;
+
+    desplazamientoY =
+        mundoCentroY * escala;
+
+
+    // ========================================
+    // RESOLUCIÓN REAL DEL CANVAS
+    // ========================================
+
+    grafica.width =
+        anchoGrafica;
+
+    grafica.height =
+        altoGrafica;
+
+
+    // ========================================
+    // REDIBUJAR
+    // ========================================
+
+    if (
+        expresionActual != null
+    ) {
+
+        graficar(
+            expresionActual
+        );
+
+    } else {
+
+        dibujarCuadricula();
+        dibujarEjes();
+        dibujarNumeros();
+    }
+}
+
+
+// ============================================
+// CÁMARA → MUESTREO
+// ============================================
+
+function obtenerPasoEcuacion(
+    minimo,
+    maximo,
+    pixeles
+) {
+
+    const rango =
+        maximo - minimo;
+
+
+    if (
+        !Number.isFinite(rango) ||
+        rango <= 0
+    ) {
+        return 1;
+    }
+
+
+    let paso =
+        pixelesPorMuestra /
+        escala;
+
+
+    if (
+        !Number.isFinite(paso) ||
+        paso <= 0
+    ) {
+
+        paso =
+            rango / 300;
+    }
+
+
+    // ========================================
+    // EVITAR DEMASIADAS MUESTRAS
+    // ========================================
+
+    const muestras =
+        rango / paso;
+
+
+    if (
+        muestras > maximoMuestras
+    ) {
+
+        paso =
+            rango / maximoMuestras;
+    }
+
+
+    // ========================================
+    // EVITAR MUY POCAS MUESTRAS
+    // ========================================
+
+    const muestrasFinales =
+        rango / paso;
+
+
+    if (
+        muestrasFinales < minimoMuestras
+    ) {
+
+        paso =
+            rango / minimoMuestras;
+    }
+
+
+    return paso;
+}
 
 
 // ============================================
@@ -53,18 +248,34 @@ contexto.lineWidth = 3;
 
 function dibujarEjes() {
 
+    const ejeX =
+        centroY +
+        desplazamientoY;
+
+    const ejeY =
+        centroX +
+        desplazamientoX;
+
+
+    contexto.strokeStyle =
+        "white";
+
+    contexto.lineWidth =
+        3;
+
+
     // EJE X
 
     contexto.beginPath();
 
     contexto.moveTo(
         0,
-        centroY + desplazamientoY
+        ejeX
     );
 
     contexto.lineTo(
-        600,
-        centroY + desplazamientoY
+        anchoGrafica,
+        ejeX
     );
 
     contexto.stroke();
@@ -75,13 +286,13 @@ function dibujarEjes() {
     contexto.beginPath();
 
     contexto.moveTo(
-        centroX + desplazamientoX,
+        ejeY,
         0
     );
 
     contexto.lineTo(
-        centroX + desplazamientoX,
-        400
+        ejeY,
+        altoGrafica
     );
 
     contexto.stroke();
@@ -139,13 +350,16 @@ function interpolarPunto(
 
 
     return {
+
         x:
             x1 +
-            (x2 - x1) * porcentaje,
+            (x2 - x1) *
+            porcentaje,
 
         y:
             y1 +
-            (y2 - y1) * porcentaje
+            (y2 - y1) *
+            porcentaje
     };
 }
 
@@ -175,7 +389,7 @@ function convertirY(y) {
 
 
 // ============================================
-// CONVERTIR PANTALLA → MUNDO
+// PANTALLA → MUNDO
 // ============================================
 
 function convertirMundoX(
@@ -203,20 +417,25 @@ function convertirMundoY(
 
 
 // ============================================
-// OBTENER LÍMITES VISIBLES
+// LÍMITES VISIBLES
 // ============================================
 
 function obtenerLimitesVisibles() {
 
     return {
+
         minimoX:
             convertirMundoX(0),
 
         maximoX:
-            convertirMundoX(600),
+            convertirMundoX(
+                anchoGrafica
+            ),
 
         minimoY:
-            convertirMundoY(400),
+            convertirMundoY(
+                altoGrafica
+            ),
 
         maximoY:
             convertirMundoY(0)
@@ -225,31 +444,38 @@ function obtenerLimitesVisibles() {
 
 
 // ============================================
-// OBTENER PASO ADAPTATIVO DE CUADRÍCULA
+// PASO ADAPTATIVO DE CUADRÍCULA
 // ============================================
 
 function obtenerPasoCuadricula() {
 
-    // Queremos aproximadamente esta cantidad
-    // de píxeles entre líneas.
+    const pixelesDeseados =
+        60;
 
-    const pixelesDeseados = 60;
-
-
-    // Cuántas unidades matemáticas caben en
-    // los píxeles deseados.
 
     const pasoAproximado =
-        pixelesDeseados / escala;
+        pixelesDeseados /
+        escala;
 
 
-    // Potencia de 10 más cercana.
+    if (
+        !Number.isFinite(
+            pasoAproximado
+        ) ||
+        pasoAproximado <= 0
+    ) {
+
+        return 1;
+    }
+
 
     const potencia =
         Math.pow(
             10,
             Math.floor(
-                Math.log10(pasoAproximado)
+                Math.log10(
+                    pasoAproximado
+                )
             )
         );
 
@@ -330,14 +556,17 @@ function formatearNumero(
 
 function dibujarSegmento(
     punto1,
-    punto2
+    punto2,
+    extension
 ) {
 
     const dx =
-        punto2.x - punto1.x;
+        punto2.x -
+        punto1.x;
 
     const dy =
-        punto2.y - punto1.y;
+        punto2.y -
+        punto1.y;
 
 
     const distancia =
@@ -348,7 +577,10 @@ function dibujarSegmento(
 
 
     if (
-        distancia == 0
+        distancia == 0 ||
+        !Number.isFinite(
+            distancia
+        )
     ) {
 
         return;
@@ -365,30 +597,29 @@ function dibujarSegmento(
     const inicioX =
         punto1.x -
         direccionX *
-        extensionSegmento;
+        extension;
 
     const inicioY =
         punto1.y -
         direccionY *
-        extensionSegmento;
+        extension;
 
 
     const finalX =
         punto2.x +
         direccionX *
-        extensionSegmento;
+        extension;
 
     const finalY =
         punto2.y +
         direccionY *
-        extensionSegmento;
+        extension;
 
 
     contexto.moveTo(
         convertirX(inicioX),
         convertirY(inicioY)
     );
-
 
     contexto.lineTo(
         convertirX(finalX),
@@ -399,28 +630,129 @@ function dibujarSegmento(
 
 // ============================================
 // DIBUJAR ECUACIÓN
-// MARCHING SQUARES
+// MARCHING SQUARES ADAPTATIVO
 // ============================================
 
 function graficarEcuacion(
     resultado
 ) {
 
-    const columnas =
-        Math.round(
-            (limiteX * 2) /
-            pasoEcuacion
+    const limites =
+        obtenerLimitesVisibles();
+
+
+    // ========================================
+    // PASO ADAPTATIVO
+    // ========================================
+
+    const pasoX =
+        obtenerPasoEcuacion(
+            limites.minimoX,
+            limites.maximoX,
+            anchoGrafica
         );
 
-    const filas =
-        Math.round(
-            (limiteY * 2) /
-            pasoEcuacion
+
+    const pasoY =
+        obtenerPasoEcuacion(
+            limites.minimoY,
+            limites.maximoY,
+            altoGrafica
+        );
+
+
+    const extensionSegmento =
+        Math.max(
+            Math.min(
+                Math.min(
+                    pasoX,
+                    pasoY
+                ) * 0.15,
+
+                1 / escala
+            ),
+
+            0
         );
 
 
     // ========================================
-    // CREAR CUADRÍCULA
+    // CANTIDAD DE CELDAS
+    // ========================================
+
+    const columnas =
+        Math.max(
+            1,
+            Math.ceil(
+                (
+                    limites.maximoX -
+                    limites.minimoX
+                ) / pasoX
+            )
+        );
+
+
+    const filas =
+        Math.max(
+            1,
+            Math.ceil(
+                (
+                    limites.maximoY -
+                    limites.minimoY
+                ) / pasoY
+            )
+        );
+
+
+    // ========================================
+    // COORDENADAS
+    // ========================================
+
+    const posicionesX =
+        new Float64Array(
+            columnas + 1
+        );
+
+    const posicionesY =
+        new Float64Array(
+            filas + 1
+        );
+
+
+    for (
+        let columna = 0;
+        columna <= columnas;
+        columna++
+    ) {
+
+        posicionesX[columna] =
+            Math.min(
+                limites.minimoX +
+                columna * pasoX,
+
+                limites.maximoX
+            );
+    }
+
+
+    for (
+        let fila = 0;
+        fila <= filas;
+        fila++
+    ) {
+
+        posicionesY[fila] =
+            Math.min(
+                limites.minimoY +
+                fila * pasoY,
+
+                limites.maximoY
+            );
+    }
+
+
+    // ========================================
+    // VALORES
     // ========================================
 
     const valores =
@@ -442,8 +774,7 @@ function graficarEcuacion(
 
 
         const y =
-            -limiteY +
-            fila * pasoEcuacion;
+            posicionesY[fila];
 
 
         for (
@@ -453,16 +784,21 @@ function graficarEcuacion(
         ) {
 
             const x =
-                -limiteX +
-                columna * pasoEcuacion;
+                posicionesX[columna];
 
 
-            filaValores[columna] =
+            const valor =
                 calcularDiferencia(
                     resultado,
                     x,
                     y
                 );
+
+
+            filaValores[columna] =
+                Number.isFinite(valor)
+                    ? valor
+                    : NaN;
         }
 
 
@@ -475,7 +811,7 @@ function graficarEcuacion(
 
 
     // ========================================
-    // RECORRER CADA CELDA
+    // RECORRER CELDAS
     // ========================================
 
     for (
@@ -492,11 +828,14 @@ function graficarEcuacion(
 
 
         const y =
-            -limiteY +
-            fila * pasoEcuacion;
+            posicionesY[fila];
 
         const yArriba =
-            y + pasoEcuacion;
+            posicionesY[fila + 1];
+
+
+        const alturaCelda =
+            yArriba - y;
 
 
         for (
@@ -506,11 +845,14 @@ function graficarEcuacion(
         ) {
 
             const x =
-                -limiteX +
-                columna * pasoEcuacion;
+                posicionesX[columna];
 
             const xDerecha =
-                x + pasoEcuacion;
+                posicionesX[columna + 1];
+
+
+            const anchoCelda =
+                xDerecha - x;
 
 
             // ====================================
@@ -530,9 +872,24 @@ function graficarEcuacion(
                 filaArriba[columna + 1];
 
 
-            // ====================================
-            // PUNTOS
-            // ====================================
+            if (
+                !Number.isFinite(
+                    valorAbajoIzquierda
+                ) ||
+                !Number.isFinite(
+                    valorAbajoDerecha
+                ) ||
+                !Number.isFinite(
+                    valorArribaIzquierda
+                ) ||
+                !Number.isFinite(
+                    valorArribaDerecha
+                )
+            ) {
+
+                continue;
+            }
+
 
             let punto1 = null;
             let punto2 = null;
@@ -765,7 +1122,8 @@ function graficarEcuacion(
 
                 dibujarSegmento(
                     punto1,
-                    punto2
+                    punto2,
+                    extensionSegmento
                 );
             }
 
@@ -783,40 +1141,51 @@ function graficarEcuacion(
                         resultado,
 
                         x +
-                        pasoEcuacion / 2,
+                        anchoCelda / 2,
 
                         y +
-                        pasoEcuacion / 2
+                        alturaCelda / 2
                     );
 
 
                 if (
-                    centro > 0
+                    Number.isFinite(
+                        centro
+                    )
                 ) {
 
-                    dibujarSegmento(
-                        punto1,
-                        punto2
-                    );
+                    if (
+                        centro > 0
+                    ) {
 
-                    dibujarSegmento(
-                        punto3,
-                        punto4
-                    );
+                        dibujarSegmento(
+                            punto1,
+                            punto2,
+                            extensionSegmento
+                        );
 
-                }
+                        dibujarSegmento(
+                            punto3,
+                            punto4,
+                            extensionSegmento
+                        );
 
-                else {
+                    }
 
-                    dibujarSegmento(
-                        punto1,
-                        punto4
-                    );
+                    else {
 
-                    dibujarSegmento(
-                        punto2,
-                        punto3
-                    );
+                        dibujarSegmento(
+                            punto1,
+                            punto4,
+                            extensionSegmento
+                        );
+
+                        dibujarSegmento(
+                            punto2,
+                            punto3,
+                            extensionSegmento
+                        );
+                    }
                 }
             }
         }
@@ -835,25 +1204,28 @@ function graficar(
     expresion
 ) {
 
-    // Guardar la expresión actual para
-    // poder redibujar al mover o hacer zoom.
-
     expresionActual =
         expresion;
 
 
+    // ========================================
+    // LIMPIAR TODO EL CANVAS
+    // ========================================
+
     contexto.clearRect(
         0,
         0,
-        600,
-        400
+        anchoGrafica,
+        altoGrafica
     );
 
 
+    // ========================================
+    // FONDO
+    // ========================================
+
     dibujarCuadricula();
-
     dibujarEjes();
-
     dibujarNumeros();
 
 
@@ -869,12 +1241,16 @@ function graficar(
 
     const esEcuacion =
         typeof resultadoInicial == "object" &&
-        resultadoInicial.tipo == "ecuacion";
+        resultadoInicial != null &&
+        resultadoInicial.tipo ==
+            "ecuacion";
 
 
     const esFuncion =
         typeof resultadoInicial == "object" &&
-        resultadoInicial.tipo != "ecuacion";
+        resultadoInicial != null &&
+        resultadoInicial.tipo !=
+            "ecuacion";
 
 
     // ========================================
@@ -905,8 +1281,6 @@ function graficar(
             resultadoInicial.expresionPreparada;
 
 
-        // COMPILAR UNA SOLA VEZ
-
         const funcionCompilada =
             compilar(
                 expresionPreparada,
@@ -916,71 +1290,9 @@ function graficar(
             );
 
 
-        // Obtener el rango matemático
-        // que actualmente está visible.
-
-        const limites =
-            obtenerLimitesVisibles();
-
-
-        contexto.beginPath();
-
-        let primerPunto = true;
-
-
-        for (
-            let x = limites.minimoX;
-            x <= limites.maximoX;
-            x += 0.05
-        ) {
-
-            const y =
-                funcionCompilada(
-                    x
-                );
-
-
-            if (
-                typeof y != "number" ||
-                !Number.isFinite(y)
-            ) {
-
-                primerPunto = true;
-
-                continue;
-            }
-
-
-            const pantallaX =
-                convertirX(x);
-
-            const pantallaY =
-                convertirY(y);
-
-
-            if (
-                primerPunto
-            ) {
-
-                contexto.moveTo(
-                    pantallaX,
-                    pantallaY
-                );
-
-                primerPunto = false;
-            }
-
-            else {
-
-                contexto.lineTo(
-                    pantallaX,
-                    pantallaY
-                );
-            }
-        }
-
-
-        contexto.stroke();
+        dibujarFuncion(
+            funcionCompilada
+        );
 
         return;
     }
@@ -989,15 +1301,6 @@ function graficar(
     // ========================================
     // EXPRESIÓN NORMAL
     // ========================================
-
-    /*
-        Primero usamos calcular() para conservar
-        exactamente la validación que ya tenía
-        el parser.
-
-        Si la expresión no produce un número
-        usando x, no la dibujamos.
-    */
 
     const prueba =
         calcular(
@@ -1016,15 +1319,7 @@ function graficar(
     }
 
 
-    /*
-        La expresión ya fue validada.
-
-        Ahora la preparamos y compilamos una
-        sola vez en lugar de llamar calcular()
-        para cada punto.
-    */
-
-    let expresionPreparada =
+    const expresionPreparada =
         prepararExpresion(
             expresion
         );
@@ -1037,23 +1332,64 @@ function graficar(
         );
 
 
-    // Obtener el rango matemático
-    // que actualmente está visible.
+    dibujarFuncion(
+        funcionCompilada
+    );
+}
+
+
+// ============================================
+// DIBUJAR FUNCIÓN
+// ============================================
+
+function dibujarFuncion(
+    funcionCompilada
+) {
 
     const limites =
         obtenerLimitesVisibles();
 
 
+    const paso =
+        obtenerPasoEcuacion(
+            limites.minimoX,
+            limites.maximoX,
+            anchoGrafica
+        );
+
+
+    const cantidadMuestras =
+        Math.max(
+            1,
+            Math.ceil(
+                (
+                    limites.maximoX -
+                    limites.minimoX
+                ) / paso
+            )
+        );
+
+
     contexto.beginPath();
+
 
     let primerPunto = true;
 
 
     for (
-        let x = limites.minimoX;
-        x <= limites.maximoX;
-        x += 0.05
+        let i = 0;
+        i <= cantidadMuestras;
+        i++
     ) {
+
+        const x =
+            Math.min(
+                limites.minimoX +
+                i * paso,
+
+                limites.maximoX
+            );
+
 
         const y =
             funcionCompilada(
@@ -1080,6 +1416,21 @@ function graficar(
 
 
         if (
+            !Number.isFinite(
+                pantallaX
+            ) ||
+            !Number.isFinite(
+                pantallaY
+            )
+        ) {
+
+            primerPunto = true;
+
+            continue;
+        }
+
+
+        if (
             primerPunto
         ) {
 
@@ -1089,6 +1440,7 @@ function graficar(
             );
 
             primerPunto = false;
+
         }
 
         else {
@@ -1115,11 +1467,18 @@ grafica.addEventListener(
 
         arrastrando = true;
 
+
+        const rectangulo =
+            grafica.getBoundingClientRect();
+
+
         ultimoMouseX =
-            evento.offsetX;
+            evento.clientX -
+            rectangulo.left;
 
         ultimoMouseY =
-            evento.offsetY;
+            evento.clientY -
+            rectangulo.top;
     }
 );
 
@@ -1133,12 +1492,25 @@ grafica.addEventListener(
         }
 
 
+        const rectangulo =
+            grafica.getBoundingClientRect();
+
+
+        const mouseX =
+            evento.clientX -
+            rectangulo.left;
+
+        const mouseY =
+            evento.clientY -
+            rectangulo.top;
+
+
         const diferenciaX =
-            evento.offsetX -
+            mouseX -
             ultimoMouseX;
 
         const diferenciaY =
-            evento.offsetY -
+            mouseY -
             ultimoMouseY;
 
 
@@ -1150,10 +1522,10 @@ grafica.addEventListener(
 
 
         ultimoMouseX =
-            evento.offsetX;
+            mouseX;
 
         ultimoMouseY =
-            evento.offsetY;
+            mouseY;
 
 
         if (
@@ -1197,15 +1569,18 @@ grafica.addEventListener(
         evento.preventDefault();
 
 
+        const rectangulo =
+            grafica.getBoundingClientRect();
+
+
         const mouseX =
-            evento.offsetX;
+            evento.clientX -
+            rectangulo.left;
 
         const mouseY =
-            evento.offsetY;
+            evento.clientY -
+            rectangulo.top;
 
-
-        // Coordenada matemática que está
-        // exactamente debajo del cursor.
 
         const mundoX =
             convertirMundoX(
@@ -1226,25 +1601,24 @@ grafica.addEventListener(
 
         escala *= factor;
 
-        // Zoom mínimo
+
         if (
             escala < 0.000000001
         ) {
 
-            escala = 0.000000001;
+            escala =
+                0.000000001;
         }
 
-        // Zoom máximo
+
         if (
             escala > 1e15
         ) {
 
-            escala = 1e15;
+            escala =
+                1e15;
         }
 
-
-        // Volvemos a calcular dónde quedó
-        // el mismo punto matemático.
 
         const nuevoMouseX =
             convertirX(
@@ -1256,9 +1630,6 @@ grafica.addEventListener(
                 mundoY
             );
 
-
-        // Ajustamos el desplazamiento para
-        // que el punto permanezca bajo el cursor.
 
         desplazamientoX +=
             mouseX -
@@ -1282,14 +1653,7 @@ grafica.addEventListener(
 
 
 // ============================================
-// EJES DESDE EL PRINCIPIO
-// ============================================
-
-dibujarEjes();
-
-
-// ============================================
-// DIBUJAR CUADRÍCULA
+// CUADRÍCULA
 // ============================================
 
 function dibujarCuadricula() {
@@ -1309,7 +1673,7 @@ function dibujarCuadricula() {
 
 
     // ========================================
-    // LÍNEAS VERTICALES
+    // VERTICALES
     // ========================================
 
     const inicioX =
@@ -1325,14 +1689,45 @@ function dibujarCuadricula() {
         ) * paso;
 
 
+    const cantidadLineasX =
+        Math.ceil(
+            (
+                finalX -
+                inicioX
+            ) / paso
+        );
+
+
     for (
-        let x = inicioX;
-        x <= finalX;
-        x += paso
+        let i = 0;
+        i <= cantidadLineasX;
+        i++
     ) {
+
+        const x =
+            inicioX +
+            i * paso;
+
+
+        if (
+            x > finalX
+        ) {
+
+            break;
+        }
+
 
         const pantallaX =
             convertirX(x);
+
+
+        if (
+            pantallaX < 0 ||
+            pantallaX > anchoGrafica
+        ) {
+
+            continue;
+        }
 
 
         contexto.beginPath();
@@ -1344,7 +1739,7 @@ function dibujarCuadricula() {
 
         contexto.lineTo(
             pantallaX,
-            400
+            altoGrafica
         );
 
         contexto.stroke();
@@ -1352,7 +1747,7 @@ function dibujarCuadricula() {
 
 
     // ========================================
-    // LÍNEAS HORIZONTALES
+    // HORIZONTALES
     // ========================================
 
     const inicioY =
@@ -1368,14 +1763,45 @@ function dibujarCuadricula() {
         ) * paso;
 
 
+    const cantidadLineasY =
+        Math.ceil(
+            (
+                finalY -
+                inicioY
+            ) / paso
+        );
+
+
     for (
-        let y = inicioY;
-        y <= finalY;
-        y += paso
+        let i = 0;
+        i <= cantidadLineasY;
+        i++
     ) {
+
+        const y =
+            inicioY +
+            i * paso;
+
+
+        if (
+            y > finalY
+        ) {
+
+            break;
+        }
+
 
         const pantallaY =
             convertirY(y);
+
+
+        if (
+            pantallaY < 0 ||
+            pantallaY > altoGrafica
+        ) {
+
+            continue;
+        }
 
 
         contexto.beginPath();
@@ -1386,15 +1812,13 @@ function dibujarCuadricula() {
         );
 
         contexto.lineTo(
-            600,
+            anchoGrafica,
             pantallaY
         );
 
         contexto.stroke();
     }
 
-
-    // Volver al estilo de la gráfica
 
     contexto.strokeStyle =
         "white";
@@ -1405,7 +1829,7 @@ function dibujarCuadricula() {
 
 
 // ============================================
-// DIBUJAR NÚMEROS
+// NÚMEROS
 // ============================================
 
 function dibujarNumeros() {
@@ -1425,7 +1849,7 @@ function dibujarNumeros() {
 
 
     // ========================================
-    // NÚMEROS DEL EJE X
+    // EJE X
     // ========================================
 
     const inicioX =
@@ -1441,14 +1865,33 @@ function dibujarNumeros() {
         ) * paso;
 
 
+    const cantidadNumerosX =
+        Math.ceil(
+            (
+                finalX -
+                inicioX
+            ) / paso
+        );
+
+
     for (
-        let x = inicioX;
-        x <= finalX;
-        x += paso
+        let i = 0;
+        i <= cantidadNumerosX;
+        i++
     ) {
 
-        // No dibujar el 0 porque el eje
-        // ya ocupa esa posición.
+        const x =
+            inicioX +
+            i * paso;
+
+
+        if (
+            x > finalX
+        ) {
+
+            break;
+        }
+
 
         if (
             Math.abs(x) <
@@ -1467,11 +1910,9 @@ function dibujarNumeros() {
             desplazamientoY;
 
 
-        // Evitar números fuera del canvas
-
         if (
             pantallaX < 0 ||
-            pantallaX > 600
+            pantallaX > anchoGrafica
         ) {
 
             continue;
@@ -1487,7 +1928,7 @@ function dibujarNumeros() {
 
 
     // ========================================
-    // NÚMEROS DEL EJE Y
+    // EJE Y
     // ========================================
 
     const inicioY =
@@ -1503,14 +1944,33 @@ function dibujarNumeros() {
         ) * paso;
 
 
+    const cantidadNumerosY =
+        Math.ceil(
+            (
+                finalY -
+                inicioY
+            ) / paso
+        );
+
+
     for (
-        let y = inicioY;
-        y <= finalY;
-        y += paso
+        let i = 0;
+        i <= cantidadNumerosY;
+        i++
     ) {
 
-        // No dibujar el 0 porque el eje
-        // ya ocupa esa posición.
+        const y =
+            inicioY +
+            i * paso;
+
+
+        if (
+            y > finalY
+        ) {
+
+            break;
+        }
+
 
         if (
             Math.abs(y) <
@@ -1529,11 +1989,9 @@ function dibujarNumeros() {
             desplazamientoX;
 
 
-        // Evitar números fuera del canvas
-
         if (
             pantallaY < 0 ||
-            pantallaY > 400
+            pantallaY > altoGrafica
         ) {
 
             continue;
@@ -1552,6 +2010,35 @@ function dibujarNumeros() {
         "white";
 }
 
+
+// ============================================
+// OBSERVAR CAMBIOS DE TAMAÑO
+// ============================================
+
+const observador =
+    new ResizeObserver(
+        () => {
+
+            ajustarCanvas();
+        }
+    );
+
+
+observador.observe(
+    visualizacion
+);
+
+
+// ============================================
+// INICIALIZACIÓN
+// ============================================
+
+ajustarCanvas();
+
+
+// ============================================
+// EXPORTAR
+// ============================================
 
 export {
     graficar

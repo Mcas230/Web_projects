@@ -1,0 +1,102 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!-- Created with Inkscape (http://www.inkscape.org/) -->
+
+<svg
+   width="64mm"
+   height="64mm"
+   viewBox="0 0 64 64"
+   version="1.1"
+   id="svg1"
+   inkscape:version="1.4.4 (dcaf3e7, 2026-05-05)"
+   sodipodi:docname="dibujo.svg"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:svg="http://www.w3.org/2000/svg">
+  <sodipodi:namedview
+     id="namedview1"
+     pagecolor="#ffffff"
+     bordercolor="#111111"
+     borderopacity="1"
+     inkscape:showpageshadow="0"
+     inkscape:pageopacity="0"
+     inkscape:pagecheckerboard="1"
+     inkscape:deskcolor="#d1d1d1"
+     inkscape:document-units="mm"
+     inkscape:lockguides="true"
+     inkscape:zoom="2"
+     inkscape:cx="155.5"
+     inkscape:cy="152.25"
+     inkscape:window-width="1920"
+     inkscape:window-height="974"
+     inkscape:window-x="-11"
+     inkscape:window-y="-11"
+     inkscape:window-maximized="1"
+     inkscape:current-layer="layer1" />
+  <defs
+     id="defs1">
+    <rect
+       x="124.09724"
+       y="52.679455"
+       width="94.398758"
+       height="135.05739"
+       id="rect8" />
+    <rect
+       x="22.25"
+       y="22"
+       width="84.5"
+       height="84.75"
+       id="rect6" />
+    <rect
+       x="35"
+       y="25.5"
+       width="49.75"
+       height="58"
+       id="rect5" />
+  </defs>
+  <g
+     inkscape:label="Capa 1"
+     inkscape:groupmode="layer"
+     id="layer1">
+    <rect
+       style="fill:#e0b84f;fill-opacity:1;stroke-width:13.5402;stroke-dasharray:none;paint-order:markers fill stroke"
+       id="rect4"
+       width="64"
+       height="64"
+       x="0"
+       y="0"
+       rx="10"
+       ry="10" />
+    <text
+       xml:space="preserve"
+       transform="scale(0.26458333)"
+       id="text4"
+       style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-family:Arial;-inkscape-font-specification:Arial;writing-mode:lr-tb;direction:ltr;white-space:pre;shape-inside:url(#rect5);fill:#2b0000;fill-opacity:1;stroke-width:27.0803;stroke-dasharray:none;paint-order:markers fill stroke" />
+    <text
+       xml:space="preserve"
+       transform="scale(0.26458333)"
+       id="text6"
+       style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-family:Arial;-inkscape-font-specification:Arial;writing-mode:lr-tb;direction:ltr;white-space:pre;shape-inside:url(#rect6);fill:#2b0000;fill-opacity:1;stroke-width:27.0803;stroke-dasharray:none;paint-order:markers fill stroke" />
+    <path
+       d="M 21.682098,49.999923 V 46.42377 Q 18.999978,46.086033 17.311259,45.23169 15.642382,44.35753 14.410592,42.430374 13.19868,40.503259 13,37.7218 l 3.596013,-0.675466 q 0.417231,2.88078 1.470211,4.231775 1.509925,1.907276 3.615874,2.125827 V 32.01985 q -2.205282,-0.417229 -4.509912,-1.708616 -1.708614,-0.953558 -2.64238,-2.642383 -0.913859,-1.688717 -0.913859,-3.834412 0,-3.814564 2.701988,-6.178796 1.807952,-1.589394 5.364228,-1.947018 V 14 h 2.105957 v 1.708607 q 3.119198,0.297938 4.94701,1.827812 2.344365,1.947013 2.821192,5.344358 l -3.695369,0.556274 Q 27.542975,21.331092 26.529826,20.218518 25.536514,19.086035 23.78812,18.728461 v 10.311236 q 2.70198,0.675469 3.576149,1.053037 1.668867,0.735112 2.721846,1.788061 1.05291,1.053036 1.609269,2.503309 0.576127,1.450366 0.576127,3.139108 0,3.715228 -2.364234,6.198654 -2.364236,2.483441 -6.119194,2.662253 V 50 Z m 0,-31.311193 q -2.08609,0.317981 -3.298008,1.668879 -1.192084,1.350985 -1.192084,3.198663 0,1.827814 1.013185,3.059594 1.03304,1.231808 3.47681,1.966882 z m 2.105956,24.715184 q 2.086097,-0.258237 3.437081,-1.807938 1.370853,-1.549677 1.370853,-3.834444 0,-1.947007 -0.973445,-3.119198 -0.953555,-1.19208 -3.83443,-2.125815 z"
+       id="text7"
+       style="font-size:3.175px;font-family:geist-mono;-inkscape-font-specification:Arial;fill:#2b0000;stroke-width:80.4254;stroke-dasharray:none;paint-order:markers fill stroke"
+       aria-label="$" />
+    <text
+       xml:space="preserve"
+       transform="scale(0.26458333)"
+       id="text8"
+       style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-family:Arial;-inkscape-font-specification:Arial;writing-mode:lr-tb;direction:ltr;white-space:pre;shape-inside:url(#rect8);fill:#2b0000;fill-opacity:1;stroke-width:270.196;stroke-dasharray:none;paint-order:markers fill stroke" />
+    <text
+       xml:space="preserve"
+       style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:40.0391px;font-family:Arial;-inkscape-font-specification:Arial;writing-mode:lr-tb;direction:ltr;fill:#2b0000;fill-opacity:1;stroke-width:901.536;stroke-dasharray:none;paint-order:markers fill stroke"
+       x="31.922844"
+       y="46.302052"
+       id="text9"><tspan
+         sodipodi:role="line"
+         id="tspan9"
+         x="31.922844"
+         y="46.302052"
+         style="stroke-width:901.536">~</tspan></text>
+  </g>
+</svg>

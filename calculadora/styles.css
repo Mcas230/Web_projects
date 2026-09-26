@@ -1,63 +1,199 @@
+:root {
+
+    /* ========================================
+       COLORES
+       ======================================== */
+
+    --color-fondo: #0A0A0E;
+    --color-panel: #0F1015;
+    --color-borde: #1E2330;
+    --color-texto: #F1F3F5;
+    --color-acento: #E0B84F;
+    --color-secundario: #9AA1AD;
+    --color-verde: #62C77A;
+
+
+    /* ========================================
+       TIPOGRAFÍAS
+       ======================================== */
+
+    --fuente-interfaz: "Inter", sans-serif;
+    --fuente-numeros: "Ubuntu", sans-serif;
+    --fuente-titulos: "Space Grotesk", sans-serif;
+
+
+    /* ========================================
+       TEXTO
+       ======================================== */
+
+    --tamano-texto: 14px;
+    --tamano-input: 20px;
+    --altura-linea-texto: 1.5;
+
+
+    /* ========================================
+       PANELES
+       ======================================== */
+
+    --ancho-panel-izquierdo: 220px;
+    --ancho-panel-derecho: 220px;
+    --alto-controles: 220px;
+
+    --padding-panel: 20px;
+    --padding-controles: 15px;
+
+
+    /* ========================================
+       BORDES
+       ======================================== */
+
+    --borde: 1px solid var(--color-borde);
+
+
+    /* ========================================
+       INTERFAZ
+       ======================================== */
+
+    --cursor-boton: pointer;
+}
+
+
+/* ============================================
+   RESET
+   ============================================ */
+
 * {
     box-sizing: border-box;
 }
 
+
+html,
 body {
+
+    width: 100%;
+    height: 100%;
+
     margin: 0;
 
-    background: #0A0A0E;
-    color: #F1F3F5;
+    overflow: hidden;
 
-    font-family: "Press Start 2P", monospace;
+    background: var(--color-fondo);
+    color: var(--color-texto);
+
+    font-family: var(--fuente-interfaz);
 }
 
 
+p {
+
+    margin: 0;
+
+    font-size: var(--tamano-texto);
+
+    line-height: var(--altura-linea-texto);
+}
+
+
+/* ============================================
+   WORKSPACE
+   ============================================ */
+
 .calculadora {
+
+    position: relative;
 
     width: 100vw;
     height: 100vh;
-
-    display: grid;
-
-    grid-template-columns:
-        220px
-        minmax(0, 1fr)
-        220px;
 
     overflow: hidden;
 }
 
 
-/* PANELES LATERALES */
+/* ============================================
+   VISUALIZACIÓN
+   ============================================ */
+
+.visualizacion {
+
+    position: absolute;
+
+    top: 0;
+    bottom: var(--alto-controles);
+    left: var(--ancho-panel-izquierdo);
+    right: var(--ancho-panel-derecho);
+
+    background: var(--color-fondo);
+
+    overflow: hidden;
+
+    z-index: 0;
+}
+
+
+#grafica {
+
+    position: absolute;
+
+    inset: 0;
+
+    display: block;
+
+    width: 100%;
+    height: 100%;
+}
+
+
+/* ============================================
+   PANELES
+   ============================================ */
 
 .panel {
 
-    background: #0F1015;
+    position: absolute;
 
-    border: 1px solid #1E2330;
+    background: var(--color-panel);
 
-    padding: 20px;
+    border: var(--borde);
+
+    padding: var(--padding-panel);
 
     overflow-y: auto;
+
+    z-index: 10;
 }
+
 
 .panel h2 {
 
     margin-top: 0;
 
-    font-size: 12px;
+    font-family: var(--fuente-titulos);
 
-    color: #E0B84F;
+    font-size: 20px;
+
+    color: var(--color-acento);
 }
 
 
-/* PANEL IZQUIERDO */
+/* ============================================
+   PANEL IZQUIERDO
+   ============================================ */
 
 .funcionesPanel {
 
-    border-right: 1px solid #1E2330;
+    top: 0;
+    bottom: 0;
+    left: 0;
+
+    width: var(--ancho-panel-izquierdo);
+
+    border-left: none;
 }
 
+
+/* ============================================
+   FUNCIONES
+   ============================================ */
 
 .listaFunciones {
 
@@ -75,83 +211,92 @@ body {
 
     padding: 10px;
 
-    background: #0A0A0E;
+    background: var(--color-fondo);
+    color: var(--color-texto);
 
-    color: #F1F3F5;
+    border: var(--borde);
 
-    border: 1px solid #1E2330;
-
-    font-family: inherit;
+    font-family: var(--fuente-interfaz);
 
     font-size: 10px;
 
     text-align: left;
 
-    cursor: pointer;
+    cursor: var(--cursor-boton);
 }
 
 
 .funcion:hover {
 
-    border-color: #E0B84F;
-
+    border-color: var(--color-acento);
 }
 
 
-/* ZONA CENTRAL */
+/* ============================================
+   PANEL DERECHO
+   ============================================ */
 
-.zonaCentral {
-    min-width: 0;
-    min-height: 0;
+.inspector {
 
-    display: grid;
-    
-    grid-template-rows: minmax(0, 1fr) 220px;
+    top: 0;
+    bottom: 0;
+    right: 0;
+
+    width: var(--ancho-panel-derecho);
+
+    border-right: none;
 }
 
 
-/* VISUALIZACIÓN */
+#inspectorContenido {
 
-.visualizacion {
+    color: var(--color-secundario);
 
-    min-height: 0;
-
-    background: #0A0A0E;
-
-    border-top: 1px solid #1E2330;
-    border-bottom: 1px solid #1E2330;
-
-    overflow: hidden;
+    font-size: 9px;
+    line-height: 1.8;
 }
 
 
-#texto {
-
-    color: #62C77A;
-
-    font-size: 20px;
-}
-
-
-/* CONTROLES */
+/* ============================================
+   CONTROLES
+   ============================================ */
 
 .controles {
 
-    min-height: 0;
+    position: absolute;
 
-    background: #0F1015;
+    left: var(--ancho-panel-izquierdo);
+    right: var(--ancho-panel-derecho);
+    bottom: 0;
 
-    padding: 15px;
+    height: var(--alto-controles);
+
+    background: var(--color-panel);
+
+    border-top: var(--borde);
+
+    padding: var(--padding-controles);
 
     display: flex;
 
     flex-direction: column;
 
     gap: 15px;
+
+    z-index: 10;
+}
+
+.calcInput::placeholder {
+
+     font-size: var(--tamano-input);
+
+    color: var(--color-secundario);
 }
 
 
-/* INPUT */
+/* ============================================
+   INPUT
+   ============================================ */
 
 .entrada {
 
@@ -171,15 +316,15 @@ body {
 
     padding: 10px;
 
-    background: #0A0A0E;
+    background: var(--color-fondo);
 
-    border: 1px solid #1E2330;
+    border: var(--borde);
 
-    color: #F1F3F5;
+    color: var(--color-texto);
 
-    font-family: inherit;
+    font-family: var(--fuente-numeros);
 
-    font-size: 12px;
+    font-size: var(--tamano-input);
 
     outline: none;
 }
@@ -187,39 +332,37 @@ body {
 
 .calcInput:focus {
 
-    border-color: #E0B84F;
-
+    border-color: var(--color-acento);
 }
 
 
 #botonAgregar {
 
     width: 45px;
-
     height: 45px;
 
-    background: #E0B84F;
-
-    color: #0A0A0E;
+    background: var(--color-acento);
+    color: var(--color-fondo);
 
     border: none;
 
-    font-family: inherit;
+    font-family: var(--fuente-numeros);
 
     font-size: 18px;
 
-    cursor: pointer;
+    cursor: var(--cursor-boton);
 }
 
 
 #botonAgregar:hover {
 
     filter: brightness(1.1);
-
 }
 
 
-/* TECLADO */
+/* ============================================
+   TECLADO
+   ============================================ */
 
 .calcButton {
 
@@ -241,60 +384,115 @@ body {
 
 .calcButton button {
 
-    background: #0A0A0E;
+    background: var(--color-fondo);
+    color: var(--color-texto);
 
-    color: #F1F3F5;
+    border: var(--borde);
 
-    border: 1px solid #1E2330;
+    font-family: var(--fuente-numeros);
 
-    font-family: inherit;
+    font-size: var(--tamano-texto);
 
-    font-size: 11px;
-
-    cursor: pointer;
+    cursor: var(--cursor-boton);
 }
 
 
 .calcButton button:hover {
 
-    border-color: #E0B84F;
-
-    color: #E0B84F;
-
+    border-color: var(--color-acento);
+    color: var(--color-acento);
 }
 
 
 .calcButton button:active {
 
-    background: #E0B84F;
-
-    color: #0A0A0E;
-
+    background: var(--color-acento);
+    color: var(--color-fondo);
 }
 
 
-/* PANEL DERECHO */
+/* ============================================
+   TEXTO
+   ============================================ */
 
-.inspector {
+#texto {
 
-    border-left: 1px solid #1E2330;
+    color: var(--color-verde);
+
+    font-size: 20px;
 }
 
 
-#inspectorContenido {
+/* ============================================
+   DIVISORES
+   ============================================ */
 
-    color: #9AA1AD;
+.divisor {
 
-    font-size: 9px;
+    position: fixed;
 
-    line-height: 1.8;
+    z-index: 100;
+
+    touch-action: none;
 }
 
-#grafica {
-    width: 100%;
-    height: 100%;
 
-    display: block;
+/* --------------------------------------------
+   DIVISOR IZQUIERDO
+   -------------------------------------------- */
 
-    border: 2px solid red;
+.divisorIzquierdo {
+
+    top: 0;
+    bottom: 0;
+
+    left:
+        calc(
+            var(--ancho-panel-izquierdo) - 4px
+        );
+
+    width: 8px;
+
+    cursor: col-resize;
+}
+
+
+/* --------------------------------------------
+   DIVISOR DERECHO
+   -------------------------------------------- */
+
+.divisorDerecho {
+
+    top: 0;
+    bottom: 0;
+
+    right:
+        calc(
+            var(--ancho-panel-derecho) - 4px
+        );
+
+    width: 8px;
+
+    cursor: col-resize;
+}
+
+
+/* --------------------------------------------
+   DIVISOR DE CONTROLES
+   -------------------------------------------- */
+
+.divisorControles {
+
+    left: var(--ancho-panel-izquierdo);
+    right: var(--ancho-panel-derecho);
+
+    bottom:
+        calc(
+            var(--alto-controles) - 4px
+        );
+
+    width: auto;
+    height: 8px;
+
+    cursor: row-resize;
 }
